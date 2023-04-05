@@ -1,6 +1,5 @@
 import os
 import json
-numpy = os
 from langchain.output_parsers import CommaSeparatedListOutputParser
 from langchain.prompts import PromptTemplate, ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain.llms import OpenAI
