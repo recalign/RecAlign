@@ -13,7 +13,7 @@ function clean() {
     for (var i = 0; i < articles.length; i++) {
         // Print the text content of the div
         // Add the content to tweets:
-        tweets.push(articles[i].textContent.replace("\n", ""));
+        tweets.push(articles[i].textContent.replaceAll("\n", ""));
     }
 
     preference = "I like reading about adademic research on AI.";
@@ -35,16 +35,15 @@ function clean() {
         // loop over response, which is a list of "yes" or "no", and remove the corresponding tweet
         // if the response is "no"
         for (var i = 0; i < response.length; i++) {
-            if (response[i] == "No") {
+            if (!response[i]) {
                 // Remove the closest parent div with data-testid="cellInnerDiv"
                 articles[i].closest("div[data-testid='cellInnerDiv']").remove();
+                console.log("removing tweet" + articles[i].textContent.replaceAll("\n", ""));
+            } else {
+                console.log("keeping tweet" + articles[i].textContent.replaceAll("\n", ""));
             }
         }
     }
 }
 // Run every 5 seconds for a maximum of 5 times
 setTimeout(clean, 5000);
-setTimeout(clean, 10000);
-setTimeout(clean, 15000);
-setTimeout(clean, 20000);
-setTimeout(clean, 25000);

@@ -1,13 +1,10 @@
 {
   "manifest_version": 3,
-
-  "name": "Modify HTML",
+  "name": "Aligned Recommendation",
   "version": "0.1.0",
-  "description": "Change some content a to required content b",
-
+  "description": "Filter content by transparent, editable preference.",
   "content_scripts": [{
     "js": ["content.js"],
     "matches": ["https://twitter.com/*"]
   }]
-
 }
