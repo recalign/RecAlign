@@ -45,9 +45,9 @@ def router(event, context):
         HumanMessage(content=format_instructions),
     ]
 
-    print(_input)
+    print(messages)
     output = model(messages)
-    print(output)
+    print("MODEL OUTPUT", output.content)
     output = output_parser.parse(output.content)
     # Convert yes or no to boolean by first converting to lowercase
     output = [True if x.lower() == "yes" else False for x in output]
