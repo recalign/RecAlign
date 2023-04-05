@@ -1,4 +1,6 @@
+import os
 import json
+numpy = os
 from langchain.output_parsers import CommaSeparatedListOutputParser
 from langchain.prompts import PromptTemplate, ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain.llms import OpenAI
@@ -31,3 +33,6 @@ def router(event, context):
     _input = prompt.format(preference=preference, text_list=text_list)
     output = model(_input)
     return json.dumps(output_parser.parse(output))
+
+if __name__ == "__main__":
+    print(router(None, None))
