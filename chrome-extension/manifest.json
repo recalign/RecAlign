@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+
+  "name": "Modify HTML",
+  "version": "0.1.0",
+  "description": "Change some content a to required content b",
+
+  "content_scripts": [{
+    "js": ["content.js"],
+    "matches": ["https://twitter.com/*"]
+  }]
+
+}

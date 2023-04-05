@@ -13,9 +13,9 @@ def router(event, context):
     output_parser = CommaSeparatedListOutputParser()
     format_instructions = output_parser.get_format_instructions()
     prompt = PromptTemplate(
-        template="The user has the following preference: {preference}. \n"
+        template="The user has the following preference:\n {preference}. \n"
                 "The following is a list of texts, with each line representing a separate item. " 
-                "Please indicate with a 'yes' or 'no' whether the user would like to read each item in the list.\n"
+                "Please indicate with a 'yes' or 'no' whether the user would like to read each item in the list based on the above preference.\n"
                 "{text_list}\n{format_instructions}",
         input_variables=["preference", "text_list"],
         partial_variables={"format_instructions": format_instructions}
@@ -30,8 +30,12 @@ def router(event, context):
     # """
     model = OpenAI(temperature=0)
     _input = prompt.format(preference=preference, text_list=text_list)
+    print(_input)
     output = model(_input)
-    return json.dumps(output_parser.parse(output))
+    output = output_parser.parse(output)
+    # Convert yes or no to boolean by first converting to lowercase
+    output = [True if x.lower() == "yes" else False for x in output]
+    return json.dumps(output)
 
 if __name__ == "__main__":
     print(router(None, None))
