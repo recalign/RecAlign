@@ -19,7 +19,7 @@ def router(event, context):
         input_variables=["preference", "text_list"],
         partial_variables={"format_instructions": format_instructions}
     )
-    
+
     # preference = "I dislike Elon Musk and politics. I like reading about adademic."
     # text_list = """
     # Serena Ge@serenaa_ge·5hLmao “girls don’t appreciate my engineering rizz”18873
@@ -30,4 +30,4 @@ def router(event, context):
     model = OpenAI(temperature=0)
     _input = prompt.format(preference=preference, text_list=text_list)
     output = model(_input)
-    print(output_parser.parse(output))
+    return json.dumps(output_parser.parse(output))
