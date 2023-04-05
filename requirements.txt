@@ -1,2 +1,3 @@
 langchain
 numpy
+openai
