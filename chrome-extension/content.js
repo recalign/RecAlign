@@ -33,42 +33,45 @@ function clean() {
         return;
     }
 
-    preference = "I like reading about adademic research on AI.";
-    var data = {
-        "messages": new_tweets,
-        "preference": preference
-    };
+    chrome.storage.sync.get(["preference"]).then((result) => {
+        console.log("Value currently is " + result.preference);
+        preference = result.preference;
+        var data = {
+            "messages": new_tweets,
+            "preference": preference
+        };
 
-    // Send the data to the server and log the response to console
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://hiubwe6637gmpslsccd4ofi3de0yaeqa.lambda-url.us-east-2.on.aws/");
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify(data));
-    console.log("[Backend]", "Request sent...");
-    xhr.onloadend = function () {
-        var response = JSON.parse(xhr.responseText);
-        console.log("[BACKEND]", response);
-        for (var i = 0; i < response.length; i++) {
-            // Set the cache to the corresponding response for the tweet
-            classification_cache.set(new_tweets[i], response[i]);
-        }
+        // Send the data to the server and log the response to console
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://hiubwe6637gmpslsccd4ofi3de0yaeqa.lambda-url.us-east-2.on.aws/");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(data));
+        console.log("[Backend]", "Request sent...");
+        xhr.onloadend = function () {
+            var response = JSON.parse(xhr.responseText);
+            console.log("[BACKEND]", response);
+            for (var i = 0; i < response.length; i++) {
+                // Set the cache to the corresponding response for the tweet
+                classification_cache.set(new_tweets[i], response[i]);
+            }
 
-        for (var i = 0; i < containers.length; i++) {
-            // If the cache does not contain the tweet, log the error
-            if (!classification_cache.has(tweets[i])) {
-                console.log("[ERROR] cache does not contain tweet " + new_tweets[i]);
-                continue;
-            }
-            var keep = classification_cache.get(tweets[i]);
-            if (!keep) {
-                // Find and hide the closest parent div with data-testid="cellInnerDiv"
-                containers[i].closest("div[data-testid='cellInnerDiv']").style.display = "none";
-                console.log("[REMOVE] tweet" + containers[i].textContent.replaceAll("\n", ""));
-            } else {
-                console.log("[KEEP] keeping tweet" + containers[i].textContent.replaceAll("\n", ""));
+            for (var i = 0; i < containers.length; i++) {
+                // If the cache does not contain the tweet, log the error
+                if (!classification_cache.has(tweets[i])) {
+                    console.log("[ERROR] cache does not contain tweet " + new_tweets[i]);
+                    continue;
+                }
+                var keep = classification_cache.get(tweets[i]);
+                if (!keep) {
+                    // Find and hide the closest parent div with data-testid="cellInnerDiv"
+                    containers[i].closest("div[data-testid='cellInnerDiv']").style.display = "none";
+                    console.log("[REMOVE] tweet" + containers[i].textContent.replaceAll("\n", ""));
+                } else {
+                    console.log("[KEEP] keeping tweet" + containers[i].textContent.replaceAll("\n", ""));
+                }
             }
         }
-    }
+    });
 }
 
 // Run every 5 seconds.

@@ -3,8 +3,15 @@
   "name": "Aligned Recommendation",
   "version": "0.1.0",
   "description": "Filter content by transparent, editable preference.",
+  "action": {
+    "default_title": "RecAlign", 
+    "default_popup": "popup.html"
+  },
   "content_scripts": [{
     "js": ["content.js"],
     "matches": ["https://twitter.com/*"]
-  }]
+  }],
+  "permissions": [
+    "storage"
+  ]
 }
