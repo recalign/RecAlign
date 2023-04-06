@@ -23,9 +23,16 @@ function clean() {
             // tweets.push(tweet);
         } else {
         console.log("This is not an adver")
-        var author_and_title = JSON.parse(containers[i].querySelector(".ContentItem").dataset.zop);
-        var author = author_and_title.authorName;
-        var title = author_and_title.title;
+        // console.log(`error: ${i}`)
+        if (containers[i].querySelector(".ContentItem").dataset.zop) {
+
+            var author_and_title = JSON.parse(containers[i].querySelector(".ContentItem").dataset.zop);
+            var author = author_and_title.authorName;
+            var title = author_and_title.title;
+        } else {
+            var title = containers[i].querySelector(".ContentItem").querySelector(".QuestionItem-title").textContent;
+            var author = "";
+        }
         var main_text = containers[i].querySelector(".ContentItem").querySelector(".RichText.ztext").textContent.replaceAll("\n", "");
         var tweet = `Author: ${author}, Title: ${title}, Previous: ${main_text}`;
         console.log(tweet)
