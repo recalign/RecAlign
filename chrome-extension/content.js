@@ -1,41 +1,41 @@
-// Set up a cache dictionary to store tweets that have been seen before
-var cache = new Map();
+// Set up a cache dictionary to store classification result for
+// tweets that have been classified before.
+var classification_cache = new Map();
 
 function clean() {
     console.log("Extension running...");
-    var articles = document.querySelectorAll("article[data-testid='tweet']");
-    var all_tweets = [];
-
-    // for (var i = 0; i < articles.length; i++) {
-    //     console.log("[DISCOVERY]", articles[i].textContent.replaceAll("\n", ""));
-    // }
+    // All tweet containers:
+    var containers = document.querySelectorAll("article[data-testid='tweet']");
     var tweets = [];
-    var filtered_articles = [];
-    for (var i = 0; i < articles.length; i++) {
+
+    // Only keep tweets that have not been classified before.
+    var new_tweets = [];
+    var new_container = [];
+    for (var i = 0; i < containers.length; i++) {
         // Find the outermost div with data-testid="tweetText" and get the text content
-        var txt_div = articles[i].querySelector("div[data-testid='tweetText']");
+        var txt_div = containers[i].querySelector("div[data-testid='tweetText']");
         if (txt_div == null) {
-            console.log("[DISCOVERY] fail to find tweet text for " +  articles[i].textContent.replaceAll("\n", ""));
-            all_tweets.push("");
+            console.log("[DISCOVERY] fail to find tweet text for " + containers[i].textContent.replaceAll("\n", ""));
+            tweets.push("");
             continue;
         }
         var tweet = txt_div.textContent.replaceAll("\n", "");
-        all_tweets.push(tweet);
+        tweets.push(tweet);
         // If tweet is new, add it to the list of tweets and add article to filtered_articles and add tweet to cache
-        if (!cache.has(tweet)) {
-            tweets.push(tweet);
-            filtered_articles.push(articles[i]);
+        if (!classification_cache.has(tweet)) {
+            new_tweets.push(tweet);
+            new_container.push(containers[i]);
         }
     }
 
     // If there are no new tweets, return
-    if (tweets.length == 0) {
+    if (new_tweets.length == 0) {
         return;
     }
 
     preference = "I like reading about adademic research on AI.";
     var data = {
-        "messages": tweets,
+        "messages": new_tweets,
         "preference": preference
     };
 
@@ -44,34 +44,36 @@ function clean() {
     xhr.open("POST", "https://hiubwe6637gmpslsccd4ofi3de0yaeqa.lambda-url.us-east-2.on.aws/");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(data));
-    xhr.onloadend = function() {
+    console.log("[Backend]", "Request sent...");
+    xhr.onloadend = function () {
         var response = JSON.parse(xhr.responseText);
         console.log("[BACKEND]", response);
         for (var i = 0; i < response.length; i++) {
             // Set the cache to the corresponding response for the tweet
-            cache.set(tweets[i], response[i]);
+            classification_cache.set(new_tweets[i], response[i]);
         }
 
-        for (var i = 0; i < articles.length; i++) {
+        for (var i = 0; i < containers.length; i++) {
             // If the cache does not contain the tweet, log the error
-            if (!cache.has(all_tweets[i])) {
-                console.log("[ERROR] cache does not contain tweet " + tweets[i]);
+            if (!classification_cache.has(tweets[i])) {
+                console.log("[ERROR] cache does not contain tweet " + new_tweets[i]);
                 continue;
             }
-            var keep = cache.get(all_tweets[i]);
+            var keep = classification_cache.get(tweets[i]);
             if (!keep) {
                 // Find and hide the closest parent div with data-testid="cellInnerDiv"
-                articles[i].closest("div[data-testid='cellInnerDiv']").style.display = "none";
-                console.log("[REMOVE] tweet" + articles[i].textContent.replaceAll("\n", ""));
+                containers[i].closest("div[data-testid='cellInnerDiv']").style.display = "none";
+                console.log("[REMOVE] tweet" + containers[i].textContent.replaceAll("\n", ""));
             } else {
-                console.log("[KEEP] keeping tweet" + articles[i].textContent.replaceAll("\n", ""));
+                console.log("[KEEP] keeping tweet" + containers[i].textContent.replaceAll("\n", ""));
             }
         }
     }
 }
 
-// Run every 5 secondS, but prevent multiple instances from running at the same time
-setInterval(function() {
+// Run every 5 seconds.
+setInterval(function () {
+    // Prevent multiple instances from running at the same time.
     if (this.inProgress) {
         return;
     }
