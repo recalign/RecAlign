@@ -1,0 +1,118 @@
+body {
+    background-color: #F2F2F2;
+    color: #222222;
+    font-family: monospace;
+    max-width: 80ch;
+    margin: 0 auto;
+    padding: 1em;
+    line-height: 1.2;
+  }
+  
+  div {
+    margin: auto;
+    display: block;
+  }
+  
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    background-color: transparent;
+    margin: .67em 0;
+    text-transform: uppercase;
+    display:inline-block;
+    text-transform: none;
+  }
+  
+  h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    background-color: transparent;
+    text-transform: none;
+    margin: .8em 0;
+  }
+  
+  a {
+    //text-decoration: none;
+    //color: #72BCD4;
+  }
+  
+  a:hover {
+    //text-decoration: underline;
+  }
+  
+  p {
+    margin: 1.5em 0;
+    font-size: 1.5em;
+  }
+  
+  em {
+    font-style: italic;
+  }
+  
+  b {
+    font-weight: bold;
+  }
+  
+  strong {
+    font-weight: bold;
+    //color: blue;
+    background-color: transparent;
+  }
+  
+  #title {
+    font-size: 1em;
+    text-transform: none;
+    font-weight: normal;
+    margin: .67em 0;
+    margin-bottom: 2em;
+  }
+  
+  .container > div {
+    margin-bottom: 2em;
+    width: 100%;
+  }
+  
+  .group {
+    margin: 1em;
+  }
+  
+  .item {
+    margin: 1em;
+  }
+
+
+  @keyframes movingGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  body {
+    background: linear-gradient(45deg, rgba(135, 206, 235, 0.8), rgba(255, 192, 203, 0.8));
+    background-size: 200% 200%;
+    animation: movingGradient 10s ease infinite;
+    min-height: 100vh;
+    color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .download-btn:hover {
+    background-color: #0056b3;
+  }
+  
