@@ -147,3 +147,8 @@ body {
     right: 40px;
     z-index: 10; /* To make sure the button stays on top of other elements */
   }
+
+  .responsive {
+    width: 100%;
+    height: auto;
+  }
