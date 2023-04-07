@@ -9,7 +9,7 @@
   },
   "content_scripts": [{
     "js": ["content.js"],
-    "matches": ["https://twitter.com/*"]
+    "matches": ["https://twitter.com/*", "https://www.twitter.com/*", "https://zhihu.com/*", "https://www.zhihu.com/*"]
   }],
   "permissions": [
     "storage"
