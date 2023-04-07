@@ -15,7 +15,7 @@
 
 <body style="width:400px; height:580px; padding:30px">
     <h1>RecAlign</h1>
-    <p class="lead">Please select where to enable RecAlign:</p>
+    <p class="lead">Enable RecAlign on:</p>
     <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
@@ -35,6 +35,14 @@
             style="height: 100px"></textarea>
         <label for="preference">Your Preference</label>
     </div>
+
+    <br>
+    <p class="lead">Your OpenAI API Key</p>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="api-key" placeholder="">
+        <label for="api-key">API Key</label>
+    </div>
+    
     <br>
     <div class="d-flex justify-content-end">
         <button id="save-button" type="button" class="btn btn-primary">Save</button>

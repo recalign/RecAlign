@@ -175,7 +175,7 @@ setInterval(function () {
     console.log("RecAlign-", window.location);
     if (window.location == "https://twitter.com/home") {
         clean_twitter();
-    } else if (window.location == "https://www.zhihu.com/") {
+    } else if (window.location == "https://www.zhihu.com/" || window.location == "https://www.zhihu.com/follow") {
         clean_zhihu();
     }
     this.inProgress = false;

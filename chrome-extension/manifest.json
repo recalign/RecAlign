@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Aligned Recommendation",
+  "name": "RecAlign",
   "version": "0.1.0",
   "description": "Filter content by transparent, editable preference.",
   "action": {
