@@ -10,6 +10,13 @@ function saveOptions() {
     chrome.storage.sync.set({ "openai_api_key": openai_api_key_val }).then(() => {
         console.log("OpenAI API key saved.");
     });
+
+    // Get the value of checkbox with id twitter, zhihu:
+    var twitter_val = document.getElementById('twitter').checked;
+    var zhihu_val = document.getElementById('zhihu').checked;
+    chrome.storage.sync.set({ "twitter": twitter_val, "zhihu": zhihu_val }).then(() => {
+        console.log("Twitter: " + twitter_val + ", Zhihu: " + zhihu_val);
+    });
 }
 
 window.addEventListener('load', function () {
@@ -36,5 +43,18 @@ window.addEventListener('load', function () {
         }
         
     });
+
+    // Get the value of twitter, zhihu from storage and set it to the checkbox
+    chrome.storage.sync.get(["twitter", "zhihu"]).then((result) => {
+        if (result.twitter == null) {
+            result.twitter = true;
+        }
+        if (result.zhihu == null) {
+            result.zhihu = true;
+        }
+        document.getElementById('twitter').checked = result.twitter;
+        document.getElementById('zhihu').checked = result.zhihu;
+    });
+
     document.getElementById('save-button').addEventListener('click', saveOptions);
 });

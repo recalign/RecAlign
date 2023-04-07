@@ -12,10 +12,10 @@ from langchain.schema import (
 
 def router(event, context):
     payload = json.loads(event["body"])
-    # Prepend a index to each text in the list
-    payload["messages"] = [f"{i+1}. {text}" for i, text in enumerate(payload["messages"])]
     api_key = payload["openai_api_key"]
 
+    # Prepend a index to each text in the list
+    payload["messages"] = [f"{i+1}. {text}" for i, text in enumerate(payload["messages"])]
     text_list = "\n".join(payload["messages"])
     preference = payload["preference"]
 
@@ -37,6 +37,7 @@ def router(event, context):
     output = output_parser.parse(output.content)
     output = [True if x.lower() == "yes" else False for x in output]
     retval = json.dumps(output)
+    del model # make sure to destroy the api key.
 
     return retval
 
