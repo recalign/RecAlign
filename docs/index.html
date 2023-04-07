@@ -15,6 +15,14 @@
     <meta name="author" content="Charles Jin">
     <link href="assets/css/reset.css" rel="stylesheet">
     <link href="assets/css/index.css" rel="stylesheet">
+    <style>
+      .gif-frame {
+      border: 15px double #666464;
+      background: #fff;
+      padding: 10px; 
+      width: 900px;
+      }
+    </style>
   </head>
 
   <body>
@@ -24,10 +32,16 @@
       <p> Recommendation systems (e.g., Twitter) optimize for grabbing your attention often to the detriment of your own well-being. Their objective is fundamentally misaligned with yours.</p>
       <p> We are starting an open source initiative RecAlign (short for Recommendation Alignment) to address this misalignment.
           We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in a transparent and editable way.</p><br>
+
       <h2>What</h2>
       <p>We are developing a chrome extension. 
          You can specify your preference for viewing recommendations (e.g., Tweets) in words such as <em>“I like reading about AI research”</em>. 
          We then use a large language model (LLM) to filter out recommendations that you do not wish to see.</p>
+
+      <!-- Insert gif here -->
+      <div class="gif-frame">
+        <img src="assets/images/Animation.gif" alt="Recalign Demo">
+      </div>   
 
       <a href="https://github.com/recalign/RecAlign" class="github-btn">View on GitHub</a><br>
       <br><br><br><br>
