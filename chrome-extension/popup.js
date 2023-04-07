@@ -25,7 +25,6 @@ window.addEventListener('load', function () {
 
     // Get the value of openai_api_key from storage and set it to the textarea
     chrome.storage.sync.get(["openai_api_key"]).then((result) => {
-        console.log("OpenAI API key currently is " + result.openai_api_key);
         if (result.openai_api_key == null || result.openai_api_key == "") {
             result.openai_api_key = "";
             document.getElementById('openai-api-key').classList.add("is-invalid");
