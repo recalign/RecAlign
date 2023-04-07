@@ -15,14 +15,13 @@ def router(event, context):
     # Prepend a index to each text in the list
     payload["messages"] = [f"{i+1}. {text}" for i, text in enumerate(payload["messages"])]
     api_key = payload["openai_api_key"]
-    openai.api_key = api_key
 
     text_list = "\n".join(payload["messages"])
     preference = payload["preference"]
 
     output_parser = CommaSeparatedListOutputParser()
     format_instructions = output_parser.get_format_instructions()
-    model = ChatOpenAI(model="gpt-3.5-turbo", model_kwargs={'temperature': 0})
+    model = ChatOpenAI(model="gpt-3.5-turbo", model_kwargs={'temperature': 0}, openai_api_key=api_key)
 
     messages = [
         SystemMessage(content="You are a reading assistant that classifies whether each item in a list fits user preference. The labels you can use are yes or no."),
@@ -39,9 +38,6 @@ def router(event, context):
     output = [True if x.lower() == "yes" else False for x in output]
     retval = json.dumps(output)
 
-    # Reset the API key
-    openai.api_key = ""
-
     return retval
 
 if __name__ == "__main__":
@@ -53,7 +49,8 @@ if __name__ == "__main__":
     event = {
         "body": json.dumps({
             "messages": tweets,
-            "preference": "I like reading about adademic research."
+            "preference": "I like reading about adademic research.",
+            "openai_api_key": os.environ["API_KEY"]
         })
     }
     print(router(event, None))
