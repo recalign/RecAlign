@@ -4,6 +4,12 @@ function saveOptions() {
     chrome.storage.sync.set({ "preference": preference_val }).then(() => {
         console.log("Value is set to " + preference_val);
     });
+
+    // Get value of text inside textarea with id openai-api-key:
+    var openai_api_key_val = document.getElementById('openai-api-key').value;
+    chrome.storage.sync.set({ "openai_api_key": openai_api_key_val }).then(() => {
+        console.log("OpenAI API key saved.");
+    });
 }
 
 window.addEventListener('load', function () {
@@ -11,6 +17,14 @@ window.addEventListener('load', function () {
     chrome.storage.sync.get(["preference"]).then((result) => {
         console.log("Value currently is " + result.preference);
         document.getElementById('preference').value = result.preference;
+    });
+
+    // Get the value of openai_api_key from storage and set it to the textarea
+    chrome.storage.sync.get(["openai_api_key"]).then((result) => {
+        console.log("OpenAI API key currently is " + result.openai_api_key);
+        // Mask the API key with asterisks except for the initial few letters.
+        var masked_key = result.openai_api_key.substring(0, 4) + "**********";
+        document.getElementById('openai-api-key').value = masked_key;
     });
     document.getElementById('save-button').addEventListener('click', saveOptions);
 });

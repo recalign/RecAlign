@@ -33,12 +33,12 @@ function clean_twitter() {
         return;
     }
 
-    chrome.storage.sync.get(["preference"]).then((result) => {
-        console.log("Value currently is " + result.preference);
-        preference = result.preference;
+    chrome.storage.sync.get(["preference", "openai_api_key"]).then((result) => {
+        console.log("Preference is " + result.preference);
         var data = {
             "messages": new_tweets,
-            "preference": preference
+            "preference": result.preference,
+            "openai_api_key": result.openai_api_key,
         };
 
         // Send the data to the server and log the response to console
