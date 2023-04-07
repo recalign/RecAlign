@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YFPKHQGK2Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YFPKHQGK2Y');
+</script>
     <meta charset="utf-8">
     <title>RecAlign (Recommendation Alignment)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Charles Jin">
     <link href="assets/css/reset.css" rel="stylesheet">
     <link href="assets/css/index.css" rel="stylesheet">
-    <script>
-      // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      // ga('create', 'UA-51518337-1', 'charlesjin.com');
-      // ga('send', 'pageview');
-
-    </script>
   </head>
 
   <body>
     <div class="container"><br><br>
-      <h1>Recommendation Alignment (RecAlign)</h1><br>
-      <p> Recommendation systems (e.g., Twitter) optimize for grabbing your attention often to the detriment of your own well-being. Their objective is fundamentally misaligned with yours.</p>
-      <p> We fight back with an open source initiative RecAlign (Recommendation Alignment). We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in an editable and transparent way.</p><br>
+      <h1>Recommendation<br>Alignment</h1>
+      <br>
+      <p> Recommendation systems (e.g., Twitter) optimize for grabbing our attention often to the detriment of our own well-being. Their objective is fundamentally misaligned with ours.</p>
+      <p> We are starting an open source initiative RecAlign (short for Recommendation Alignment) to address this misalignment.
+          We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in a transparent and editable way.</p><br>
       <h2>What</h2>
-      <p>We provide you with a chrome extension. You can specify your viewing preference in words such as <em>“I like reading about AI research”</em>. 
-        We’ll use a large language model (LLM) to filter out recommendations that you do not wish to see.</p>
+      <p>We are developing a chrome extension. 
+         You can specify your preference for viewing recommendations (e.g., Tweets) in words such as <em>“I like reading about AI research”</em>. 
+         We then use a large language model (LLM) to filter out recommendations that you do not wish to see.</p>
 
       <a href="path/to/your/file.ext" download class="download-btn">Download Extension</a>
       <br><br><br><br>
       <h2>Why</h2>
-      <p>Perhaps you registered your Twitter account to read about academic research, but the moment you click on a funny meme, those will be the only thing to exist on your timeline thereafter.</p>
-      <p>Perhaps you are an alcoholic striving to come clean, but the recommendation system knows you too well and suggest purchasing alcohol on every website you visit.</p>
-      <p>The recurring problem is, recommendation systems knows too well who we are, but nothing about who you aspire to be. As a remedy, we believe as users, we have the right to not see what we do not wish to see, and we want to share this superpower with you via RecAlign, an open source initiative for recommendation alignment.</p>
+      <p>Perhaps you signed up for Twitter to keep up with research, but a single click on a funny meme will flood your timeline with similar content.</p>
+      <p>Perhaps you are recovering from alcohol addiction, but the recommendation system knows too well about your love for alcohol and infests your feed with ads for alcohol[1].</p>
+      <p>The recurring problem is, recommendation systems are skilled at catering to who you are, but contributes nothing towards who you aspire to be. 
+        As a practical and initial remedy, we believe as users, you have the right to not see what you do not wish to see, and we want to share this superpower with you via RecAlign, an open source initiative for recommendation alignment.</p>
     </div><br>
 
   </body>
