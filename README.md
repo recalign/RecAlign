@@ -11,3 +11,5 @@
 - Pin the extension on the toolbar.
 - Click on the extension icon.
 - Fill in your preference as well as your OpenAI API Key, which you can find [here](https://platform.openai.com/account/api-keys).
+
+[Step-by-Step Installation](./docs/get_started/install_chrome_extension_en.md)
