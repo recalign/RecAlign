@@ -66,6 +66,7 @@ body {
     margin: .67em 0;
     margin-bottom: 2em;
   }
+
   
   .container > div {
     margin-bottom: 2em;
@@ -129,4 +130,20 @@ body {
   
   .github-btn:hover {
     background-color: #161b22;
+  }
+
+  .translate-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #24292e;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    z-index: 10; /* To make sure the button stays on top of other elements */
   }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YFPKHQGK2Y"></script>
 <script>
@@ -8,6 +8,19 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-YFPKHQGK2Y');
+</script>
+<script>
+  function translateToChinese() {
+    var englishContent = document.querySelector("#english-content");
+    var chineseContent = document.querySelector("#chinese-content");
+    if (chineseContent.style.display === "none") {
+      chineseContent.style.display = "block";
+      englishContent.style.display = "none";
+    } else {
+      chineseContent.style.display = "none";
+      englishContent.style.display = "block"; 
+    }
+  }
 </script>
     <meta charset="utf-8">
     <title>RecAlign (Recommendation Alignment)</title>
@@ -26,10 +39,12 @@
   </head>
 
   <body>
-    <div class="container"><br><br>
+    <button onclick="translateToChinese()" class="translate-btn">中文</button>
+
+    <div class="container" id="english-content"><br><br>
       <h1>Recommendation<br>Alignment</h1>
       <br>
-      <p> Recommendation systems (e.g., Twitter) optimize for grabbing your attention often to the detriment of your own well-being. Their objective is fundamentally misaligned with yours.</p>
+      <p> Recommendation systems (e.g., Twitter) optimize for holding your attention and spoiling you to the detriment of your own well-being. This objective is fundamentally misaligned with yours.</p>
       <p> We are starting an open source initiative RecAlign (short for Recommendation Alignment) to address this misalignment.
           We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in a transparent and editable way.</p><br>
 
@@ -50,6 +65,35 @@
       <p>Perhaps you are recovering from alcohol addiction, but the recommendation system knows too well about your love for alcohol and infests your feed with ads for alcohol[1].</p>
       <p>The recurring problem is that, recommendation systems are skilled at catering to who you are, but contributes nothing towards who you aspire to be. 
         As a practical and initial remedy, we believe as users, you have the right to not see what you do not wish to see, and we want to share this superpower with you via RecAlign, an open source initiative for recommendation alignment.</p>
+      <br>
+      <p>[1] The Alignment Problem, by Brian Christian.</p>
+      </div><br>
+
+
+    <div class="container" id="chinese-content" style="display: none"><br><br>
+      <h1>用户可控<br>推荐</h1>
+      <br>
+      <p> 推荐系统 (例如 微博, 知乎...) 被设计来抓住你的注意力, 并用信息茧房来宠坏你. 代价则可能是放缓了你提升自我的速度, 这与你使用推荐系统来获取信息的目标是完全不符的.</p>
+      <p> 我们发起了一个开源项目 RecAlign, 来解决这个长期存在的问题. 用户可以自由的表明自己想看到什么不想看到什么, 然后我们会使用大语言模型 (LLMs) 来审查和移除那些不符合用户偏好的内容. 我们致力于让推荐系统变得透明, 并重新赋予用户决定自己看到什么的权利.</p><br>
+
+      <h2>RecAlign 是什么</h2>
+      <p>我们正在开发一个浏览器插件. 
+        你可以自由的表明你的偏好, 比如 <em>“我想看与 AI 研究 相关的内容”</em>.
+        我们会根据你的偏好来过滤掉你不想看到的内容.</p>
+
+      <!-- Insert gif here -->
+      <div class="gif-frame">
+        <img src="assets/images/Animation.gif" alt="Recalign Demo">
+      </div>   
+
+      <a href="https://github.com/recalign/RecAlign" class="github-btn">View on GitHub</a><br>
+      <br><br><br><br>
+      <h2>为什么发起 RecAlign</h2>
+      <p>也许你注册了 知乎 来关注 AI 研究, 但是只要点击一次八卦新闻, 就会让你的推荐内容被各种各样的内容淹没.</p>
+      <p>也许你希望从今天开始戒酒, 但是推荐系统知道你喜欢喝酒, 于是依旧会在你打开的所有网页中不断的推送酒类广告[1].</p>
+      <p>现实中不断发生的问题是, 推荐系统会根据你的历史行为来推荐内容, 但是却不会考虑你的未来目标. 推荐系统认为的你, 也许并不是你想成为的你.
+        作为一个初步的解决方案, 我们认为用户有权利决定自己想看到什么, 不想看到什么. </p>
+      <p>我们希望通过 RecAlign 这个开源项目来让每个用户都能控制自己的信息流, 而不是把它完全交给推荐系统.</p>
       <br>
       <p>[1] The Alignment Problem, by Brian Christian.</p>
       </div><br>
