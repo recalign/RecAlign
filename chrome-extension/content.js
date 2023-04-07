@@ -21,10 +21,10 @@ function clean_twitter() {
             var containers = document.querySelectorAll("article[data-testid='tweet']");
             var tweets = [];
 
-            var filter = Array.prototype.filter,
-                containers = filter.call(containers, function (container) {
-                    return checkVisible(container);
-                });
+            var filter = Array.prototype.filter
+            containers = filter.call(containers, function (container) {
+                return checkVisible(container);
+            });
 
             // Only keep tweets that have not been classified before.
             var new_tweets = [];
@@ -115,42 +115,35 @@ function clean_zhihu() {
             // All tweet containers:
             var containers = document.querySelectorAll(".Card.TopstoryItem");
             var tweets = [];
+            
+            var filter = Array.prototype.filter
+            containers = filter.call(containers, function (container) {
+                return checkVisible(container);
+            });
 
             // Only keep tweets that have not been classified before.
             var new_tweets = [];
             var new_container = [];
             for (var i = 0; i < containers.length; i++) {
                 // Find the outermost div with data-testid="tweetText" and get the text content
-                // var txt_div = containers[i].querySelector("div[data-testid='tweetText']");
-                var if_adver = containers[i].querySelector(".ContentItem");
-                if (if_adver == null) {
-                    console.log("This is an adver");
-                    // console.log(containers[i].textContent)
-                    var tweet = `This is an advertisement ${i}`;
-                    containers[i].style.display = "none";
-                    // tweets.push(tweet);
+                if (containers[i].querySelector(".ContentItem").dataset.zop) {
+                    var author_and_title = JSON.parse(containers[i].querySelector(".ContentItem").dataset.zop);
+                    var author = author_and_title.authorName;
+                    var title = author_and_title.title;
                 } else {
-                    console.log("This is not an adver")
-                    // console.log(`error: ${i}`)
-                    if (containers[i].querySelector(".ContentItem").dataset.zop) {
-
-                        var author_and_title = JSON.parse(containers[i].querySelector(".ContentItem").dataset.zop);
-                        var author = author_and_title.authorName;
-                        var title = author_and_title.title;
-                    } else {
-                        var title = containers[i].querySelector(".ContentItem").querySelector(".QuestionItem-title").textContent;
-                        var author = "";
-                    }
-                    var main_text = containers[i].querySelector(".ContentItem").querySelector(".RichText.ztext").textContent.replaceAll("\n", "");
-                    var tweet = `Author: ${author}, Title: ${title}, Previous: ${main_text}`;
-                    console.log(tweet)
+                    var title = containers[i].querySelector(".ContentItem").querySelector(".QuestionItem-title").textContent;
+                    var author = "";
                 }
+                var main_text = containers[i].querySelector(".ContentItem").querySelector(".RichText.ztext").textContent.replaceAll("\n", "");
+                var tweet = `Author: ${author}, Title: ${title}, Body: ${main_text}`;
+                console.log(tweet)
 
                 tweets.push(tweet);
                 // If tweet is new, add it to the list of tweets and add article to filtered_articles and add tweet to cache
                 if (!classification_cache.has(tweet)) {
                     new_tweets.push(tweet);
                     new_container.push(containers[i]);
+                    containers[i].style.opacity = "0.3";
                 }
             }
 
@@ -159,12 +152,13 @@ function clean_zhihu() {
                 return;
             }
 
-            chrome.storage.sync.get(["preference"]).then((result) => {
+            chrome.storage.sync.get(["preference", "openai_api_key"]).then((result) => {
                 console.log("Value currently is " + result.preference);
                 preference = result.preference;
                 var data = {
                     "messages": new_tweets,
-                    "preference": preference
+                    "preference": preference,
+                    "openai_api_key": result.openai_api_key,
                 };
 
                 // Send the data to the server and log the response to console
@@ -193,6 +187,8 @@ function clean_zhihu() {
                             containers[i].style.display = "none";
                             console.log("[REMOVE] tweet: " + tweets[i]);
                         } else {
+                            // Set opacity to 1
+                            containers[i].style.opacity = "1";
                             console.log("[KEEP] keeping tweet: " + tweets[i]);
                         }
                     }

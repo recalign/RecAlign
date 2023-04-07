@@ -37,9 +37,7 @@ window.addEventListener('load', function () {
             document.getElementById('openai-api-key').classList.add("is-invalid");
             document.getElementById('openai-api-key').value = "";
         } else {
-            // Mask the API key with asterisks except for the initial few letters.
-            var masked_key = result.openai_api_key.substring(0, 4) + "**********";
-            document.getElementById('openai-api-key').value = masked_key;
+            document.getElementById('openai-api-key').value = result.openai_api_key;
         }
         
     });
