@@ -10,15 +10,20 @@
   gtag('config', 'G-YFPKHQGK2Y');
 </script>
 <script>
+  var englishButtonText = "中文"; 
+  var chineseButtonText = "English";
   function translateToChinese() {
     var englishContent = document.querySelector("#english-content");
     var chineseContent = document.querySelector("#chinese-content");
+    var translateButton = document.querySelector("#translate-button");
     if (chineseContent.style.display === "none") {
       chineseContent.style.display = "block";
       englishContent.style.display = "none";
+      translateButton.textContent = chineseButtonText; 
     } else {
       chineseContent.style.display = "none";
       englishContent.style.display = "block"; 
+      translateButton.textContent = englishButtonText; 
     }
   }
 </script>
@@ -37,7 +42,7 @@
   </head>
 
   <body>
-    <button onclick="translateToChinese()" class="translate-btn">中文</button>
+    <button onclick="translateToChinese()" id="translate-button" class="translate-btn">中文</button>
 
     <div class="container" id="english-content"><br><br>
       <h1>Recommendation<br>Alignment</h1>
