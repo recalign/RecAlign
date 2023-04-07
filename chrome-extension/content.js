@@ -2,11 +2,23 @@
 // tweets that have been classified before.
 var classification_cache = new Map();
 
+
+function checkVisible(elm) {
+    var rect = elm.getBoundingClientRect();
+    var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+    return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
 function clean_twitter() {
     console.log("Extension running...");
     // All tweet containers:
     var containers = document.querySelectorAll("article[data-testid='tweet']");
     var tweets = [];
+
+    var filter   = Array.prototype.filter,
+    containers = filter.call(containers, function(container) {
+        return checkVisible(container);
+    });
 
     // Only keep tweets that have not been classified before.
     var new_tweets = [];
@@ -18,9 +30,17 @@ function clean_twitter() {
             console.log("[DISCOVERY] fail to find tweet text for " + containers[i].textContent.replaceAll("\n", ""));
             tweets.push("");
             continue;
-        }
+        } 
+
         var tweet = txt_div.textContent.replaceAll("\n", "");
         tweets.push(tweet);
+
+        // Partially hide tweets that have not been classified yet.
+        parent = containers[i].closest("div[data-testid='cellInnerDiv']");
+        if (!classification_cache.has(tweets[i]) && parent) {
+            parent.style.opacity = "0.3";
+        }
+        
         // If tweet is new, add it to the list of tweets and add article to filtered_articles and add tweet to cache
         if (!classification_cache.has(tweet)) {
             new_tweets.push(tweet);
@@ -67,6 +87,8 @@ function clean_twitter() {
                     containers[i].closest("div[data-testid='cellInnerDiv']").style.display = "none";
                     console.log("[REMOVE] tweet" + containers[i].textContent.replaceAll("\n", ""));
                 } else {
+                    // Set opacity to 1
+                    containers[i].closest("div[data-testid='cellInnerDiv']").style.opacity = "1";
                     console.log("[KEEP] keeping tweet" + containers[i].textContent.replaceAll("\n", ""));
                 }
             }
@@ -164,19 +186,20 @@ function clean_zhihu() {
     });
 }
 
-// Run every 5 seconds.
+// Run every 3 seconds.
 setInterval(function () {
     // Prevent multiple instances from running at the same time.
     if (this.inProgress) {
         return;
     }
     this.inProgress = true;
+
     // If the user is on Twitter, run the Twitter extension
-    console.log("RecAlign-", window.location);
-    if (window.location == "https://twitter.com/home") {
+    if (window.location == "https://twitter.com/home" || window.location == "https://www.twitter.com/home") {
         clean_twitter();
+    // If the user is on Zhihu, run the Zhihu extension
     } else if (window.location == "https://www.zhihu.com/" || window.location == "https://www.zhihu.com/follow") {
         clean_zhihu();
     }
     this.inProgress = false;
-}, 5000);
+}, 3000);
