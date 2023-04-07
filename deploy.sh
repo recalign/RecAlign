@@ -2,10 +2,10 @@
 set -e
 
 # Create a fresh clone of this repository at /tmp:
-rm -f /tmp/llm-rec.zip
+rm -f /tmp/RecAlign.zip
 cd /tmp
-git clone git@github.com:tjingrant/llm-rec.git
-cd llm-rec
+git clone git@github.com:tjingrant/RecAlign.git
+cd RecAlign
 git checkout main
 
 # Compute the sha256 hash of requirements.txt and store it to filename:
@@ -32,7 +32,7 @@ fi
 zip -r /tmp/$filename.zip .
 
 # Clean up:
-rm -rf /tmp/llm-rec
-mv /tmp/$filename.zip /tmp/llm-rec.zip
+rm -rf /tmp/RecAlign
+mv /tmp/$filename.zip /tmp/RecAlign.zip
 
-echo "Done. The deployment package is at /tmp/llm-rec.zip"
+echo "Done. The deployment package is at /tmp/RecAlign.zip"
