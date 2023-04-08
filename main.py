@@ -42,11 +42,11 @@ def router(event, context):
     return retval
 
 if __name__ == "__main__":
-    # tweets = """Max Tegmark@tegmark·4h·Only 4% of Americans strongly disagree with the proposed pause on AI more powerful than #GPT4, so loud pause critics linked to big tech aren\'t representative. Upton Sinclair said "It is difficult to get a man to understand something, when his salary depends on his not…\xa0Show more586628142.1K
-    #             Andrew Carr@andrew_n_carr·46mWow the new Segment Anything model from Meta is pretty amazingread image descriptionALT8516
-    #             The Daily Show RetweetedJordan Klepper@jordanklepper·4hA curious public demands more volleyball clarity.Quote TweetThe Daily Show@TheDailyShow·5h.@jordanklepper got to ask George Santos a few important questions at Trump\'s arraignment.491251,494221.6K
-    #             NYU AI School \'23@nyuaischool·21hLast 2 days to apply to the NYU AI School 2023 for a unique, in-person experience with leading researchers from NYU, Google, and more! We\'re working on rolling admissions so if you\'re waiting to submit your application we encourage you to do it soon :)nyu-mll.github.ioNYU AI SchoolNYU AI School3161,804"""
-    tweets = "this is an AI research paper"
+    tweets = """Max Tegmark@tegmark·4h·Only 4% of Americans strongly disagree with the proposed pause on AI more powerful than #GPT4, so loud pause critics linked to big tech aren\'t representative. Upton Sinclair said "It is difficult to get a man to understand something, when his salary depends on his not…\xa0Show more586628142.1K
+                Andrew Carr@andrew_n_carr·46mWow the new Segment Anything model from Meta is pretty amazingread image descriptionALT8516
+                The Daily Show RetweetedJordan Klepper@jordanklepper·4hA curious public demands more volleyball clarity.Quote TweetThe Daily Show@TheDailyShow·5h.@jordanklepper got to ask George Santos a few important questions at Trump\'s arraignment.491251,494221.6K
+                NYU AI School \'23@nyuaischool·21hLast 2 days to apply to the NYU AI School 2023 for a unique, in-person experience with leading researchers from NYU, Google, and more! We\'re working on rolling admissions so if you\'re waiting to submit your application we encourage you to do it soon :)nyu-mll.github.ioNYU AI SchoolNYU AI School3161,804"""
+
     tweets = list(map(lambda x: x.strip(), tweets.split("\n")))
     f=open('api_key.json')
     data = json.load(f)
