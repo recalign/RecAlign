@@ -46,12 +46,17 @@ if __name__ == "__main__":
                 Andrew Carr@andrew_n_carr·46mWow the new Segment Anything model from Meta is pretty amazingread image descriptionALT8516
                 The Daily Show RetweetedJordan Klepper@jordanklepper·4hA curious public demands more volleyball clarity.Quote TweetThe Daily Show@TheDailyShow·5h.@jordanklepper got to ask George Santos a few important questions at Trump\'s arraignment.491251,494221.6K
                 NYU AI School \'23@nyuaischool·21hLast 2 days to apply to the NYU AI School 2023 for a unique, in-person experience with leading researchers from NYU, Google, and more! We\'re working on rolling admissions so if you\'re waiting to submit your application we encourage you to do it soon :)nyu-mll.github.ioNYU AI SchoolNYU AI School3161,804"""
+
     tweets = list(map(lambda x: x.strip(), tweets.split("\n")))
+    f=open('api_key.json')
+    data = json.load(f)
+    api_key = data['key'] if os.environ.get("API_KEY") is None else os.environ["API_KEY"]
+    
     event = {
         "body": json.dumps({
             "messages": tweets,
             "preference": "I like reading about adademic research.",
-            "openai_api_key": os.environ["API_KEY"]
+            "openai_api_key": api_key
         })
     }
     print(router(event, None))
