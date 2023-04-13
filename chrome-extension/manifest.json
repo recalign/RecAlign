@@ -3,8 +3,11 @@
   "name": "RecAlign",
   "version": "0.1.0",
   "description": "Filter content by transparent, editable preference.",
+   "icons": {
+    "128": "icon128.png"
+  },
   "action": {
-    "default_title": "RecAlign", 
+    "default_title": "RecAlign",
     "default_popup": "popup.html"
   },
   "content_scripts": [{
