@@ -12,3 +12,8 @@ We are starting an open source initiative RecAlign (short for Recommendation Ali
 - Click on the extension icon.
 - Fill in your preference as well as your OpenAI API Key, which you can find [here](https://platform.openai.com/account/api-keys).
 
+# Dev build:
+- Run `npm install`.
+- Run `npm run build`.
+- Compiled chrome extension now exsits at the `chrome-extension` folder.
+- Load the `chrome-extension` folder as unpacked extension.
