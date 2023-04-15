@@ -1,7 +1,8 @@
 # Recommendation Alignment (RecAlign)
 
-- [Installation.](./docs/get_started/install_chrome_extension_en.md)
-- [Chrome Web Store Page.](https://chrome.google.com/webstore/detail/recalign/eedopfonifglenhkedconaljmbnaimej?hl=en-GB)
+[<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png">](https://chrome.google.com/webstore/detail/recalign/eedopfonifglenhkedconaljmbnaimej)
+
+- [Development Installation.](./docs/get_started/install_chrome_extension_en.md)
 
 Recommendation systems (e.g., Twitter) optimize for your attention and spoil you to the detriment of your own well-being. Their objective is fundamentally misaligned with yours.
 
