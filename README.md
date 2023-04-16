@@ -6,7 +6,9 @@
 
 Recommendation systems (e.g., Twitter) optimize for your attention and spoil you to the detriment of your own well-being. Their objective is fundamentally misaligned with yours.
 
-We are starting an open source initiative RecAlign (short for Recommendation Alignment) to address this misalignment. We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in a transparent and editable way.
+We are developing an open source chrome extension RecAlign (short for Recommendation Alignment) to address this misalignment. We use large language models (LLMs) to vet and remove recommendations according to your explicitly stated preference in a transparent and editable way.
+
+![Animation](https://user-images.githubusercontent.com/6410074/232265086-b7832c3a-fff9-4edc-bb4c-c0c4c3faf449.gif)
 
 # Setting Up:
 - Pin the extension on the toolbar.
