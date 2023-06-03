@@ -48,7 +48,18 @@ function createPreferenceTag(name: string, enabled: boolean): HTMLElement {
     checkbox.type = 'checkbox';
     checkbox.checked = enabled;
     tag.appendChild(checkbox);
-    
+
+    // Add a delete button to the tag
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'delete-button';
+    tag.appendChild(deleteButton);
+
+    // Remove the tag when the delete button is clicked
+    deleteButton.addEventListener('click', () => {
+       tag.remove();
+    });
+
     return tag;
 }
 
