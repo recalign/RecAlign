@@ -58,11 +58,14 @@ function clean_twitter(): void {
         return;
       }
 
-      chrome.storage.sync.get(["preference", "openai_api_key"]).then((result: { [key: string]: any }) => {
-        console.log("Preference is " + result.preference);
+      chrome.storage.sync.get(["preferences", "openai_api_key"]).then((result: { [key: string]: any }) => {
+        console.log("Preference is " + result.preferences);
+        const enabledPreferencesObjects = result.preferences.filter((pref: { name: string, enabled: boolean }) => pref.enabled);
+        const enabledPreferencesTextList = enabledPreferencesObjects.map((pref: { name: string }) => pref.name);
+        console.log("Enabled preferences are " + enabledPreferencesTextList);
         const data = {
           "messages": new_tweets,
-          "preference": result.preference,
+          "preference": enabledPreferencesTextList,
           "openai_api_key": result.openai_api_key,
         };
 
